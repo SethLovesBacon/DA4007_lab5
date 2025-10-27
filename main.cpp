@@ -23,8 +23,11 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-
-
-
+    string text;
+    getline(datafile, text);
     datafile.close();
+    cout << text << endl;
+
+
+    
 }
