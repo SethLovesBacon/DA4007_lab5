@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "small_language_model.h"
 using namespace std;
 
 
@@ -8,9 +9,12 @@ int main(int argc, char* argv[]) {
         cout << "Usage: slm <int> <file> <int>" << endl;
         return 1;
     }
+
+    int word_size;
+    int output_size;
     try {
-        int word_size = stoi(argv[1]);
-        int output_size = stoi(argv[3]);
+        word_size = stoi(argv[1]);
+        output_size = stoi(argv[3]);
     }
     catch (invalid_argument) {
         cerr << "Invalid input - Usage: slm <int> <file> <int>" << endl;
@@ -28,6 +32,8 @@ int main(int argc, char* argv[]) {
     datafile.close();
     cout << text << endl;
 
-
-    
+    Small_Language_Model model = Small_Language_Model(text, word_size, output_size);
+    model.train();
+    model.get_word_freq();
+    model.get_next_char_freq();
 }
