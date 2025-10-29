@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "small_language_model.h"
+#include "text_generator.h"
 using namespace std;
 
 
@@ -36,4 +37,9 @@ int main(int argc, char* argv[]) {
     model.train();
     model.get_word_freq();
     model.get_next_char_freq();
+
+    TextGenerator generator(model);
+    string generated_text = generator.generateText(output_size);
+    cout << "Generated text: " << generated_text << endl;
+
 }
