@@ -22,6 +22,8 @@ class Small_Language_Model {
     int word_size;
     int output_size;
     int word_count;
+
+    // maps used to count the frequency for substrings and next chars
     map<string, float> word_freq;
     map<string, map<char, float>> next_char_freq;
     map<string, int> substr_char_count;

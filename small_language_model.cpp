@@ -16,6 +16,7 @@ Small_Language_Model::Small_Language_Model(string input_text, int input_word_siz
 
 
 void Small_Language_Model::train() {
+    // trains the model by cycling through each n sized substring of the text
     word_count = text.size() - word_size + 1;
     string sub_str;
     char next_char;
@@ -34,17 +35,21 @@ void Small_Language_Model::train() {
 
 
 void Small_Language_Model::update_word_freq(string sub_str, int count) {
+    // increases the word freq for the substring
     word_freq[sub_str] += 1.0 / count;
 }
 
 
 void Small_Language_Model::update_next_char_count(string sub_str, char next_char) {
+    // increases the count of next chars following a sub string and the amount of time that
+    // next character has appeared for that substring
     substr_char_count[sub_str] += 1;
     next_char_count[sub_str][next_char] += 1;
 }
 
 
 void Small_Language_Model::update_next_char_freq() {
+    // converts the count of next chars for a substring into the next char frequency
     for (auto [word, next_char] : next_char_count) {
         int total = substr_char_count[word];
         for (auto [character, count] : next_char)
@@ -64,6 +69,7 @@ map<string, map<char, float>>& Small_Language_Model::get_next_char_freq() {
 
 
 void Small_Language_Model::print_word_freq() {
+    // cycles through the word freq printing the substring and its freq
     for (auto word : word_freq) {
         cout << word.first << ": " << word.second << endl;
     }
@@ -71,6 +77,7 @@ void Small_Language_Model::print_word_freq() {
 
 
 void Small_Language_Model::print_next_char_freq() {
+    // cycles through the next char freq printing the substring, next char and its freq
     for (auto word : next_char_freq) {
         map<char, float>char_freq = word.second;
 
