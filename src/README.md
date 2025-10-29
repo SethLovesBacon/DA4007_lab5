@@ -1,6 +1,8 @@
 # DA4007_lab5
 Lab 5 for DA4007 - SLM
 
+I only have a few commits under the src folder, this is because I had orginally put all my files in the main repo folder and only made and moved them into the src folder on the 29th Oct.
+The vast majority of my commits are under History for DA4007_lab5
 
 This project implements a small language model that generates text based on k-grams (substrings of length k). The program reads an input text file, computes frequencies of k-grams and the probabilities of the next character, and then generates new text.
 
