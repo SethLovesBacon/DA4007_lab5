@@ -15,7 +15,8 @@ public:
 
 private:
     Small_Language_Model& model;  // store reference instead of object
-    //int output_size;
+    
+    double random_number(float);
 
     template <typename T>
     T object_from_prob(const map<T, float>&);

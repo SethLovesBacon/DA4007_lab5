@@ -24,13 +24,11 @@ T TextGenerator::object_from_prob(const map<T, float>& probability_map) {
         cumulative.push_back(sum);
     }
 
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<> dis(0.0, sum);
-    double r = dis(gen);
+    double random_num = random_number(sum);
 
-    for (size_t i = 0; i < cumulative.size(); ++i) {
-        if (r <= cumulative[i])
+    // loops through distribution to find the object that corresponds to the random num
+    for (int i = 0; i < cumulative.size(); i++) {
+        if (random_num <= cumulative[i])
             return items[i];
     }
 
@@ -45,18 +43,31 @@ string TextGenerator::generate_text(int output_size) {
     // Pick starting word
     string current_word = object_from_prob(word_freq);
     string text = current_word;
+    char next_char;
 
     int remaining = output_size - current_word.size();
     for (int i = 0; i < remaining; ++i) {
-        if (next_char_freq.find(current_word) == next_char_freq.end())
-            break;
-
-        char next_char = object_from_prob(next_char_freq[current_word]);
+        if (next_char_freq.find(current_word) == next_char_freq.end()) {
+            next_char = ' '; // if current word is not in freq that make next char a space
+        }
+        else { 
+            next_char = object_from_prob(next_char_freq[current_word]); 
+        }
         text += next_char;
 
         current_word = current_word.substr(1) + next_char;
     }
 
     return text;
+}
+
+
+double TextGenerator::random_number(float sum) {
+    // selects a random numbers based off of distribution using a random seed
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> dis(0.0, sum);
+    double random_num = dis(gen);
+    return random_num;
 }
 

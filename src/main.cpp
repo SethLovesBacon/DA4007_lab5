@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
     // generate text using the probabilities from the training model
     TextGenerator generator(model);
-    string generated_text = generator.generateText(output_size);
+    string generated_text = generator.generate_text(output_size);
     cout << "Generated text: " << generated_text << endl;
 
 }
