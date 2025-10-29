@@ -3,7 +3,7 @@
 CXX = g++
 CXXFLAGS = -Wall -std=c++17
 
-slm: main.o small_language_model.o
+slm: main.o small_language_model.o text_generator.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp %.h
