@@ -17,4 +17,4 @@ From the src directory:
 ```bash
 make
 
-Usage: ./slm <int> <file> <int>
+Usage: ./slm <sub_string_size> <file> <output_size>
