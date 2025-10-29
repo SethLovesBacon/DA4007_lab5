@@ -10,8 +10,12 @@ class Small_Language_Model {
     Small_Language_Model(string, int, int);
 
     void train();
-    void get_word_freq();
-    void get_next_char_freq();
+    map<string, float>& get_word_freq();
+    map<string, map<char, float>>& get_next_char_freq();
+
+    void print_word_freq();
+    void print_next_char_freq();
+    
 
     private:
     string text;

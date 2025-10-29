@@ -53,14 +53,24 @@ void Small_Language_Model::update_next_char_freq() {
 }
 
 
-void Small_Language_Model::get_word_freq() {
+map<string, float>& Small_Language_Model::get_word_freq() {
+    return word_freq;
+}
+
+
+map<string, map<char, float>>& Small_Language_Model::get_next_char_freq() {
+    return next_char_freq;
+}
+
+
+void Small_Language_Model::print_word_freq() {
     for (auto word : word_freq) {
         cout << word.first << ": " << word.second << endl;
     }
 }
 
 
-void Small_Language_Model::get_next_char_freq() {
+void Small_Language_Model::print_next_char_freq() {
     for (auto word : next_char_freq) {
         map<char, float>char_freq = word.second;
 
