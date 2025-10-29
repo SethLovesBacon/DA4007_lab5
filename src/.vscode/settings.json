@@ -4,6 +4,10 @@
         "string": "cpp",
         "iomanip": "cpp",
         "fstream": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "bitset": "cpp",
+        "unordered_map": "cpp",
+        "cmath": "cpp",
+        "locale": "cpp"
     }
 }
