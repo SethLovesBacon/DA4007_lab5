@@ -18,6 +18,13 @@ class Small_Language_Model {
     int word_size;
     int output_size;
     int word_count;
-    map<string, int> word_freq;
-    map<string, map<char, int>> next_char_freq;
+    map<string, float> word_freq;
+    map<string, map<char, float>> next_char_freq;
+    map<string, int> substr_char_count;
+    map<string, map<char, int>> next_char_count;
+
+
+    void update_word_freq(string, int);
+    void update_next_char_freq();
+    void update_next_char_count(string, char);
 };

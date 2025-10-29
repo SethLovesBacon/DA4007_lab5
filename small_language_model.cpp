@@ -16,27 +16,39 @@ Small_Language_Model::Small_Language_Model(string input_text, int input_word_siz
 
 
 void Small_Language_Model::train() {
-    word_count = 0;
-    for (int i = 0; i < text.size() - word_size + 1; i++) {
-        string sub_str = text.substr(i, word_size);
+    word_count = text.size() - word_size + 1;
+    string sub_str;
+    char next_char;
+    for (int i = 0; i < word_count; i++) {
+        sub_str = text.substr(i, word_size);
 
-        char next_char;
-        if (i == text.size() - word_size + 1) { next_char = ' '; }
-        else { next_char = text[i + 1]; }
+        update_word_freq(sub_str, word_count);
 
-        if (word_freq.count(sub_str) == 0) { 
-            word_freq[sub_str] = 1; 
-            next_char_freq[sub_str][next_char] = 1;
+        if (i != (text.size() - word_size)) { 
+            next_char = text[i + word_size]; 
+            update_next_char_count(sub_str, next_char);
         }
-        else {
-            word_freq[sub_str] += 1;
-            if (next_char_freq[sub_str].count(next_char) == 0) {
-                next_char_freq[sub_str][next_char] = 1;
-            }
-            else { next_char_freq[sub_str][next_char] += 1; }
-            
-        }
-        word_count++;
+    }
+    update_next_char_freq();
+}
+
+
+void Small_Language_Model::update_word_freq(string sub_str, int count) {
+    word_freq[sub_str] += 1.0 / count;
+}
+
+
+void Small_Language_Model::update_next_char_count(string sub_str, char next_char) {
+    substr_char_count[sub_str] += 1;
+    next_char_count[sub_str][next_char] += 1;
+}
+
+
+void Small_Language_Model::update_next_char_freq() {
+    for (auto [word, next_char] : next_char_count) {
+        int total = substr_char_count[word];
+        for (auto [character, count] : next_char)
+            next_char_freq[word][character] = 1.0 * count / total;
     }
 }
 
@@ -50,11 +62,10 @@ void Small_Language_Model::get_word_freq() {
 
 void Small_Language_Model::get_next_char_freq() {
     for (auto word : next_char_freq) {
-        map<char, int>char_freq = word.second;
+        map<char, float>char_freq = word.second;
 
         for (auto character : char_freq) {
             cout << word.first << " " << character.first << " " << character.second << endl;
         }
     }
-
 }
