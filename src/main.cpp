@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     if (argc != 4) { // ensures correct useage
-        cout << "Usage: slm <int> <file> <int>" << endl;
+        cout << "Usage: ./slm <int> <file> <int>" << endl;
         return 1;
     }
 
